@@ -39,8 +39,7 @@ graph TD
     %% DMZ Subnet
     FW -->|VLAN 10| DMZ{DMZ Subnet}
     subgraph DMZ_Zone [DMZ Zone - The Trap]
-        DMZ --> Honeypot[Traditional Honeypot]
-        DMZ --> DVWA[Vulnerable Web Apps]
+        DMZ --> Cowrie[Cowrie SSH/Telnet Honeypot]
     end
     
     %% Victim Subnet with Next-Gen Defense
@@ -61,7 +60,7 @@ graph TD
         FileBeat[FileBeat - Log Shipper] --> Elastic[ElasticSearch]
         Elastic --> Monitoring[Monitoring Dashboard / Kibana]
         SOC --> Wazuh[Wazuh SIEM / XDR]
-        SOC --> SecOnion[Security Onion - Network Monitor]
+        SOC --> Zeek[Zeek / Suricata - Network Monitor]
         SOC --> SOAR[Shuffle SOAR - Orchestration]
         SOC --> TheHive[The Hive - Incident Response]
     end
@@ -72,7 +71,7 @@ graph TD
     
     %% Advanced Autonomous AI Flow
     Wazuh -- 1. Triggers Alert --> SOAR
-    SecOnion -- 1. Triggers Alert --> SOAR
+    Zeek -- 1. Triggers Alert --> SOAR
     Elastic -- 1. Triggers Alert --> SOAR
     
     SOAR -- 2. Sends Context --> AI((Autonomous AI Agent - Ollama))
@@ -105,7 +104,7 @@ To strictly align with the architectural diagram while ensuring smooth operation
 | **Victim: Active Directory** | Windows Server Core VM | 2 GB | 2 | Headless domain controller. |
 | **Victim: Windows Client** | Windows 10/11 VM | 4 GB | 2 | Primary target for AD attacks & Honeytokens. |
 | **Victim: Linux Server** | Ubuntu Server VM | 2 GB | 2 | Hosts eBPF (Tetragon/Falco) for deep kernel monitoring. |
-| **DMZ: Vulnerable Web/Trap** | Linux VM (Micro) | 1 GB | 1 | Hosts DVWA and Traditional Honeypot. |
+| **DMZ: Deception & Trap** | Linux VM (Micro) | 1 GB | 1 | Hosts **OWASP Juice Shop** (Modern vulnerable web app) and **Cowrie** (Interactive SSH/Telnet Honeypot for adversary tracking and malware sandboxing). |
 | **Adversary: Kali Linux** | Linux VM | 2 GB | 2 | Manual attacks and CALDERA agent deployment. |
 | **Multi-Cloud Environment** | External SaaS (AWS/Azure/GCP) | 0 GB | 0 | Hosted externally. Zero local hardware footprint. Logs are ingested via FileBeat in the SOC node. |
 | **AI Agent (Ollama)** | Host OS (Windows 11) | 0 GB | N/A | Offloaded to the host's RTX 4050 GPU (VRAM) to save VM memory. |
