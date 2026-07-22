@@ -96,17 +96,18 @@ graph TD
 
 ## Resource Allocation (Hardware Engineering)
 
-To ensure smooth operation without overloading the host machine, resources are strictly allocated utilizing headless VMs and Docker containers. The total maximum RAM footprint is optimized to ~18-20 GB.
+To strictly align with the architectural diagram while ensuring smooth operation on a 32GB RAM host (~20GB available), resources are highly optimized. Heavy standalone OS installations (like Security Onion) are replaced with their containerized core engines (Zeek/Suricata), and execution is scenario-based to prevent host memory exhaustion. Total concurrent footprint: ~18-22 GB.
 
 | Component / Node | Environment | RAM | vCPU | Notes |
 | :--- | :--- | :--- | :--- | :--- |
-| **pfSense (Firewall/Router)** | VMware VM | 1 GB | 1 | Lightweight, handles routing across 4 VLANs. |
-| **SOC & Defense Center** | Ubuntu Server VM + Docker | 8 - 10 GB | 4 | The core engine. Hosts Docker containers for Wazuh, Elastic, Shuffle, and TheHive. |
-| **Victim: Active Directory** | Windows Server Core VM | 2 GB | 2 | Headless version (No GUI) to save resources. |
-| **Victim: Windows Client** | Windows 10/11 VM | 4 GB | 2 | Main target endpoint for attack simulation. |
-| **DMZ: Vulnerable Web** | Linux VM (Micro) | 1 GB | 1 | Hosts intentionally vulnerable apps (e.g., DVWA). |
-| **Adversary: Kali Linux** | Linux VM | 2 GB | 2 | Used for manual attacks and managing CALDERA. |
-| **AI Agent (Ollama)** | Host OS (Windows 11) | 0 GB (VM) | N/A | Runs on the host to utilize the RTX 4050 GPU (VRAM) for AI log triage, saving VM RAM. |
+| **pfSense (Firewall/Router)** | VMware VM | 1 GB | 1 | Handles routing across external, DMZ, Victim, and SOC subnets. |
+| **SOC & Defense Center** | Ubuntu Server VM (Docker) | 10 GB | 4 | Heavy lifting node. Runs Wazuh, Elastic Stack, Shuffle, TheHive, and **Zeek/Suricata** (Replacing standalone Security Onion). |
+| **Victim: Active Directory** | Windows Server Core VM | 2 GB | 2 | Headless domain controller. |
+| **Victim: Windows Client** | Windows 10/11 VM | 4 GB | 2 | Primary target for AD attacks & Honeytokens. |
+| **Victim: Linux Server** | Ubuntu Server VM | 2 GB | 2 | Hosts eBPF (Tetragon/Falco) for deep kernel monitoring. |
+| **DMZ: Vulnerable Web/Trap** | Linux VM (Micro) | 1 GB | 1 | Hosts DVWA and Traditional Honeypot. |
+| **Adversary: Kali Linux** | Linux VM | 2 GB | 2 | Manual attacks and CALDERA agent deployment. |
+| **AI Agent (Ollama)** | Host OS (Windows 11) | 0 GB | N/A | Offloaded to the host's RTX 4050 GPU (VRAM) to save VM memory. |
 
 ## Project Phases & Progress
 - [x] Phase 1: Architecture Design & GitHub Repo Initialization.
