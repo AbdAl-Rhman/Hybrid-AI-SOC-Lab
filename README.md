@@ -83,7 +83,7 @@ graph TD
     SOAR -- 4b. Deploys Defense Rules --> Wazuh
 ```
 
-## 🛠️ Technology Stack & Tools
+## Technology Stack & Tools
 
 *   **Infrastructure & Routing:** pfSense, Proxmox/VMware, VLAN Segmentation.
 *   **SIEM & Log Aggregation:** Wazuh, Elastic Stack (Filebeat, Elasticsearch, Kibana).
