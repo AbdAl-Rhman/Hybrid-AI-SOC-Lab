@@ -80,7 +80,7 @@ graph TD
     AI -- 3b. Generates Sigma/YARA Rules --> SOAR
     
     SOAR -- 4a. Auto-Creates Ticket --> TheHive
-    SOAR -- 4b. Deploys Defense Rules --> Wazuh
+    SOAR -- 4b. Deploys Defense Rules --> Wazuh```
 
 Technology Stack & ToolsInfrastructure & Routing: pfSense, Proxmox/VMware, VLAN Segmentation.SIEM & Log Aggregation: Wazuh, Elastic Stack (Filebeat, Elasticsearch, Kibana).Network Security Monitoring: Security Onion, Zeek/Suricata.Next-Gen Security: Tetragon/Falco (eBPF Kernel Monitoring).Active Deception: CanaryTokens (Honeytokens).SOAR & Incident Response: Shuffle, TheHive.AI & Automation: Local LLMs (Ollama) as a Tier-2 Analyst.Adversary Emulation: Kali Linux, MITRE CALDERA, Atomic Red Team.
 
