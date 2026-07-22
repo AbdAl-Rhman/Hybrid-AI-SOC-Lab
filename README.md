@@ -107,6 +107,7 @@ To strictly align with the architectural diagram while ensuring smooth operation
 | **Victim: Linux Server** | Ubuntu Server VM | 2 GB | 2 | Hosts eBPF (Tetragon/Falco) for deep kernel monitoring. |
 | **DMZ: Vulnerable Web/Trap** | Linux VM (Micro) | 1 GB | 1 | Hosts DVWA and Traditional Honeypot. |
 | **Adversary: Kali Linux** | Linux VM | 2 GB | 2 | Manual attacks and CALDERA agent deployment. |
+| **Multi-Cloud Environment** | External SaaS (AWS/Azure/GCP) | 0 GB | 0 | Hosted externally. Zero local hardware footprint. Logs are ingested via FileBeat in the SOC node. |
 | **AI Agent (Ollama)** | Host OS (Windows 11) | 0 GB | N/A | Offloaded to the host's RTX 4050 GPU (VRAM) to save VM memory. |
 
 ## Project Phases & Progress
