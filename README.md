@@ -104,7 +104,7 @@ To strictly align with the architectural diagram while ensuring smooth operation
 | **Victim: Active Directory** | Windows Server Core VM | 2 GB | 2 | Headless domain controller. |
 | **Victim: Windows Client** | Windows 10/11 VM | 4 GB | 2 | Primary target for AD attacks & Honeytokens. |
 | **Victim: Linux Server** | Ubuntu Server VM | 2 GB | 2 | Hosts eBPF (Tetragon/Falco) for deep kernel monitoring. |
-| **DMZ: Deception & Trap** | Linux VM (Micro) | 1 GB | 1 | Hosts **OWASP Juice Shop** (Modern vulnerable web app) and **Cowrie** (Interactive SSH/Telnet Honeypot for adversary tracking and malware sandboxing). |
+| **DMZ: Deception & Trap** | Linux VM (Micro) | 1 GB | 1 | Hosts **Cowrie** (Interactive SSH/Telnet Honeypot for adversary tracking and malware sandboxing). |
 | **Adversary: Kali Linux** | Linux VM | 2 GB | 2 | Manual attacks and CALDERA agent deployment. |
 | **Multi-Cloud Environment** | External SaaS (AWS/Azure/GCP) | 0 GB | 0 | Hosted externally. Zero local hardware footprint. Logs are ingested via FileBeat in the SOC node. |
 | **AI Agent (Ollama)** | Host OS (Windows 11) | 0 GB | N/A | Offloaded to the host's RTX 4050 GPU (VRAM) to save VM memory. |
