@@ -1,6 +1,4 @@
-# Hybrid-AI-SOC-Lab
-Next-Gen Hybrid AI-Driven SOC Lab featuring Multi-Cloud telemetry, eBPF kernel monitoring, and Active Deception. It utilizes an Autonomous AI Agent (Local LLMs) via SOAR (Shuffle) and SIEM (Wazuh) to analyze automated attacks (Caldera) and dynamically deploy defense rules.
-# Next-Gen Hybrid AI-Driven SOC Lab
+# Hybrid AI-Driven SOC Lab
 
 Welcome to the **Next-Gen Hybrid AI-Driven SOC Lab**. This project is a state-of-the-art, multi-cloud, and deeply automated home lab designed to simulate a modern Enterprise Security Operations Center (SOC). 
 
@@ -80,20 +78,6 @@ graph TD
     SOAR -- 2. Sends Context --> AI((Autonomous AI Agent - Ollama))
     AI -- 3a. Triage & Explanation --> SOAR
     AI -- 3b. Generates Sigma/YARA Rules --> SOAR
-
-## Resource Allocation (Hardware Engineering)
-
-To ensure smooth operation without overloading the host machine, resources are strictly allocated utilizing headless VMs and Docker containers. The total maximum RAM footprint is optimized to ~18-20 GB.
-
-| Component / Node | Environment | RAM | vCPU | Notes |
-| :--- | :--- | :--- | :--- | :--- |
-| **pfSense (Firewall/Router)** | VMware VM | 1 GB | 1 | Lightweight, handles routing across 4 VLANs. |
-| **SOC & Defense Center** | Ubuntu Server VM + Docker | 8 - 10 GB | 4 | The core engine. Hosts Docker containers for Wazuh, Elastic, Shuffle, and TheHive. |
-| **Victim: Active Directory** | Windows Server Core VM | 2 GB | 2 | Headless version (No GUI) to save resources. |
-| **Victim: Windows Client** | Windows 10/11 VM | 4 GB | 2 | Main target endpoint for attack simulation. |
-| **DMZ: Vulnerable Web** | Linux VM (Micro) | 1 GB | 1 | Hosts intentionally vulnerable apps (e.g., DVWA). |
-| **Adversary: Kali Linux** | Linux VM | 2 GB | 2 | Used for manual attacks and managing CALDERA. |
-| **AI Agent (Ollama)** | Host OS (Windows 11) | 0 GB (VM) | N/A | Runs on the host to utilize the RTX 4050 GPU (VRAM) for AI log triage, saving VM RAM. |
     
     SOAR -- 4a. Auto-Creates Ticket --> TheHive
     SOAR -- 4b. Deploys Defense Rules --> Wazuh
